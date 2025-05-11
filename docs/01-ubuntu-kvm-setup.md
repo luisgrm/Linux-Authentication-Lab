@@ -59,6 +59,7 @@ Go to **Settings > System > Processor**:
  ```powershell
 cd "C:\Program Files\Oracle\VirtualBox"
 .\VBoxManage.exe modifyvm "ubuntu-admin-vm" --nested-hw-virt on
+.\VBoxManage.exe showvminfo "ubuntu-admin-vm"
 ```
 ![Screenshot 5a: Nested Virtualization CLI troubleshoot](../screenshots/05a-vbox-cpu-nested-cli-troubleshoot.png)
 
