@@ -64,10 +64,16 @@ cd "C:\Program Files\Oracle\VirtualBox"
 
 ### 6. Attach the ISO
 
-Go to **Settings > Storage**:
+If you enabled Unattended Installation during VM creation, the ISO may already be attached and the installer will start automatically. In that case, you can skip this step.
 
-- Select the empty optical drive
-- Choose the Ubuntu ISO you downloaded
+Otherwise, attach the ISO manually:
+
+- Go to **Settings > Storage**:
+    - Under **Controller: SATA**, click the small **CD icon with the plus sign** to add a new optical drive
+    - In the pop-up window, click the **Add** icon (top-left corner) to browse your local files
+    - Locate and select your ISO file: `ubuntu-24.04.2-desktop-amd64.iso`
+    - Click **Choose** to confirm
+    - Make sure your final setup looks like the screenshot below before continuing.
 
 ![Screenshot 6: Attach ISO](../screenshots/06-vbox-iso.png)
 
