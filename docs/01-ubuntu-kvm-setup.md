@@ -79,4 +79,23 @@ Otherwise, attach the ISO manually:
 
 ### 7. Start the VM and Install Ubuntu
 
-Proceed with the Ubuntu installation using default options. Create a user with sudo access. System configuration is done in the next step.
+Select `ubuntu-admin-vm` in VirtualBox and click **Start**. The VM will boot into the Ubuntu installer.
+
+Go through the installation using default options:
+
+- Choose your preferred keyboard layout
+- Accept default installation type (erase disk and install Ubuntu)
+- Optionally install updates and third-party software
+- Create a user account with **sudo access**
+
+![Screenshot 7: Ubuntu Installer](../screenshots/07-vbox-install-ubuntu.png)
+
+After the installation completes, reboot the VM. Then, the system will prompt:
+
+> Please remove the installation medium, then press ENTER
+
+If you already removed the ISO, simply press **Enter** to reboot into your installed system.
+
+When the desktop loads for the first time, you should see Ubuntu welcome screen like this:
+
+![Screenshot 8: Ubuntu Desktop after Install](../screenshots/08-vbox-installed-desktop.png)
