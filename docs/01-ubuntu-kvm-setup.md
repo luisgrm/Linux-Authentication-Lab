@@ -17,7 +17,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ### 1. Launch Virtual Box and Click "New"
 
-![Screenshot 1: Virtual Box - New VM](screenshots/01-vbox-new.png)
+![Screenshot 1: Virtual Box - New VM](../screenshots/01-vbox-new.png)
 
 ### 2. Set the VM Name and OS Type
 
@@ -25,21 +25,21 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 - **Type:** Linux
 - **Version:** Ubuntu (64-bit)
 
-![Screenshot 2: VM Name and Type](screenshots/02-vbox-name-type.png)
+![Screenshot 2: VM Name and Type](../screenshots/02-vbox-name-type.png)
 
 ### 3. Allocate Memory and CPU
 
 - **RAM:** 16,384MB (16GB)
 - **CPUs:** 4-6 (depending on your host capacity)
 
-![Screenshot 3: Memory Settings](screenshots/03-vbox-memory.png)
+![Screenshot 3: Memory Settings](../screenshots/03-vbox-memory.png)
 
 ### 4. Create Virtual Hard Disk
 
 - **Disk Type:** VDI (dynamically allocated)
 - **Size:** 80GB
 
-![Screenshot 4: Disk Creation](screenshots/04-vbox-disk.png)
+![Screenshot 4: Disk Creation](../screenshots/04-vbox-disk.png)
 
 ### 5. Configure System Settings
 
@@ -50,7 +50,7 @@ Go to **Settings > System > Processor**:
 
 (If it's not available here, you'll enable it via `VBoxManage` after creation.)
 
-![Screenshot 5: Enable Nested Virtualization](screenshots/05-vbox-cpu-nested.png)
+![Screenshot 5: Enable Nested Virtualization](../screenshots/05-vbox-cpu-nested.png)
 
 ### 6. Attach the ISO
 
@@ -59,7 +59,7 @@ Go to **Settings > Storage**:
 - Select the empty optical drive
 - Choose the Ubuntu ISO you downloaded
 
-![Screenshot 6: Attach ISO](screenshots/06-vbox-iso.png)
+![Screenshot 6: Attach ISO](../screenshots/06-vbox-iso.png)
 
 ### 7. Start the VM and Install Ubuntu
 
