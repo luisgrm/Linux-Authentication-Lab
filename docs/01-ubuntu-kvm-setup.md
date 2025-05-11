@@ -1,0 +1,76 @@
+# Phase 1: Ubuntu Admin VM Setup
+
+## Step 1: Download Ubuntu Desktop ISO
+
+Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
+
+- URL: [https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop) 
+- Version used in this lab: Ubuntu 24.04.2 LTS
+- File: `ubuntu-24.04.2-desktop-amd64.iso`
+- Size: ~5.9GB
+
+**Note**: This ISO is large (~5GB) and includes GNOME and all major desktop components. You may choose the Minimal ISO instead if you prefer a lighter base and are comfortable installing required packages manually.
+
+---
+
+## Step 2: Create the `ubuntu-admin-vm` in VirtualBox
+
+### 1. Launch Virtual Box and Click "New"
+
+![Screenshot 1: Virtual Box - New VM](screenshots/01-vbox-new.png)
+
+### 2. Set the VM Name and OS Type
+
+- **Name:** `ubuntu-admin-vm`
+- **Type:** Linux
+- **Version:** Ubuntu (64-bit)
+
+![Screenshot 2: VM Name and Type](screenshots/02-vbox-name-type.png)
+
+### 3. Allocate Memory and CPU
+
+- **RAM:** 16,384MB (16GB)
+- **CPUs:** 4-6 (depending on your host capacity)
+
+![Screenshot 3: Memory Settings](screenshots/03-vbox-memory.png)
+
+### 4. Create Virtual Hard Disk
+
+- **Disk Type:** VDI (dynamically allocated)
+- **Size:** 80GB
+
+![Screenshot 4: Disk Creation](screenshots/04-vbox-disk.png)
+
+### 5. Configure System Settings
+
+Go to **Settings > System > Processor**:
+- **Enable Nested Virtualization** by checking:
+    - "Enable PAE/NX"
+    - "Enable Nested VT-x/AMD-V"
+
+(If it's not available here, you'll enable it via `VBoxManage` after creation.)
+
+![Screenshot 5: Enable Nested Virtualization](screenshots/05-vbox-cpu-nested.png)
+
+### 6. Attach the ISO
+
+Go to **Settings > Storage**:
+
+- Select the empty optical drive
+- Choose the Ubuntu ISO you downloaded
+
+![Screenshot 6: Attach ISO](screenshots/06-vbox-iso.png)
+
+### 7. Start the VM and Install Ubuntu
+
+Proceed with the Ubuntu installation using default options. Create a user with sudo access. System configuration is done in the next step.
+
+---
+
+## Optional Step: Enable Nested Virtualization via CLI (If needed)
+
+If nested virtualization does not appear in the GUI, use the following command on your **Windows Host** (with VM powered off):
+```powershell
+cd "C:\Program Files\Oracle\VirtualBox"
+.\VBoxManage.exe modifyvm "ubuntu-admin-vm" --nested-hw-virt on
+```
