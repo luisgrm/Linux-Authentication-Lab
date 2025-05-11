@@ -52,6 +52,16 @@ Go to **Settings > System > Processor**:
 
 ![Screenshot 5: Enable Nested Virtualization](../screenshots/05-vbox-cpu-nested.png)
 
+ #### Troubleshooting VT-x/AMD-V Not Visible
+
+ Checkbox for VT-x/AMD-V is not clickable in VirtualBox GUI. Enabled nested virtualization from the Windows host using this command (with the VM powered off):
+
+ ```powershell
+cd "C:\Program Files\Oracle\VirtualBox"
+.\VBoxManage.exe modifyvm "ubuntu-admin-vm" --nested-hw-virt on
+```
+![Screenshot 5a: Nested Virtualization CLI troubleshoot](../screenshots/05a-vbox-cpu-nested-cli-troubleshoot.png)
+
 ### 6. Attach the ISO
 
 Go to **Settings > Storage**:
@@ -64,13 +74,3 @@ Go to **Settings > Storage**:
 ### 7. Start the VM and Install Ubuntu
 
 Proceed with the Ubuntu installation using default options. Create a user with sudo access. System configuration is done in the next step.
-
----
-
-## Optional Step: Enable Nested Virtualization via CLI (If needed)
-
-If nested virtualization does not appear in the GUI, use the following command on your **Windows Host** (with VM powered off):
-```powershell
-cd "C:\Program Files\Oracle\VirtualBox"
-.\VBoxManage.exe modifyvm "ubuntu-admin-vm" --nested-hw-virt on
-```
