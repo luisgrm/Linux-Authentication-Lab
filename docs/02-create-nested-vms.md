@@ -61,7 +61,7 @@ chmod +x scripts/install-kvm-tools.sh
 
 ### Restart Required Once Again
 
-After installing the KVM tools, you must reboot the system or log out/log in in to apply group membership changes. If this step is skipped, `virt-manager` may fail to access virtualization features.
+After installing the KVM tools, you must reboot the system or log out/log in to apply group membership changes. If this step is skipped, `virt-manager` may fail to access virtualization features.
 
 ---
 
@@ -92,6 +92,27 @@ Please ensure that `virt-manager` launches without errors and shows a local QEMU
 
 If you receive no output from `lsmod | grep kvm` or if `/proc/cpuinfo` returns `0` for `vmx` or `svm`, this is expected behavior in some VirtualBox-based nested environments. As long as `virt-manager` launches, and you can access the QEMU/KVM backend, you are good to proceed.
 
-See the screenshot below for a reference of the expected output and GUI status:
+- See the screenshot below for a reference of the expected output and GUI status:
 
 ![Screenshot 11: Verification Output and GUI](../screenshots/11-kvm-verification.png)
+
+---
+
+## Step 4: Create the ipa-server VM in Virt-Manager
+
+This virtual machine will host the FreeIPA server, which provides centralized authentication, DNS, and Kerberos services for our lab.
+
+---
+
+### Step 4.1: Download Fedora Server 39 ISO
+
+Download the official Fedora Server ISO from the Fedora Project:
+
+- URL: [https://getfedora.org/en/server/download/](https://getfedora.org/en/server/download/)
+- Version used in this lab: Fedora Server 39 (x86_64)
+- File: `Fedora-Server-dvd-x86_64-39-1.5.iso`
+- Size: ~2.1GB
+
+> Tip: Use the Ubuntu Admin VM's browser to download the ISO directly into `~/Downloads` or a custom `~/ISOs` directory
+
+---
