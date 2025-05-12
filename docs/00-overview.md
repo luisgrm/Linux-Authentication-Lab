@@ -22,7 +22,7 @@ This project is designed as part of a hands-on portfolio to showcase system admi
 
 This documentation is divided into the following stages:
 
-- `01-ubuntu-kvm-setup.md`: Creating and preparing the outer Ubuntu VM
+- `01-ubuntu-admin-vm-virtualbox.md`: Creating and preparing the outer Ubuntu VM
 - `02-create-nested-vms.md`: Defining and installing KVM nested guests
 - `03-freeipa-server-setup.md`: FreeIPA installation and DNS/Kerberos setup
 - `04-join-ubuntu-client.md`: Joining Ubuntu to the IPA domain
