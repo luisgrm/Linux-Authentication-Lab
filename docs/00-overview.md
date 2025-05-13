@@ -14,7 +14,7 @@ This project is designed as part of a hands-on portfolio to showcase system admi
 - **Host OS:** Windows 11 Education with Virtual Box
 - **Admin VM (Outer VM):** Ubuntu 24.04.02 LTS Desktop with KVM/QEMU, libvirt, virt-manager
 - **Nested VMs**
-    - `ipa-server`: Fedora Server 39 with FreeIPA (LDAP, DNS, Kerberos)
+    - `ipa-server`: Fedora Server 42 with FreeIPA (LDAP, DNS, Kerberos)
     - `ubuntu-client1`, `ubuntu-client2`: Ubuntu Desktop clients
     - `win-client`: Optional Windows 10/11 domain join testing
 

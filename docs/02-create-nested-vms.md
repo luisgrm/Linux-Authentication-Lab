@@ -109,10 +109,98 @@ This virtual machine will host the FreeIPA server, which provides centralized au
 Download the official Fedora Server ISO from the Fedora Project:
 
 - URL: [https://getfedora.org/en/server/download/](https://getfedora.org/en/server/download/)
-- Version used in this lab: Fedora Server 39 (x86_64)
-- File: `Fedora-Server-dvd-x86_64-39-1.5.iso`
-- Size: ~2.1GB
+- Version used in this lab: Fedora Server 42 (x86_64)
+- File: `Fedora-Server-dvd-x86_64-42-1.1.iso`
+- Size: ~2.7GB
 
 > Tip: Use the Ubuntu Admin VM's browser to download the ISO directly into `~/Downloads` or a custom `~/ISOs` directory
 
+![Screenshot 12: Fedora Download Page](../screenshots/12-fedora-download.png)
+
 ---
+
+### Step 4.2: Launch Virt-Manager and Create a New VM
+
+1. Open `virt-manager` from the Ubuntu Admin VM.
+2. Click **Create a New Virtual Machine**
+
+![Screenshot 13: virt-manager New VM Creation Wizard](../screenshots/13-virt-new.png)
+
+> **Note**: If you see a warning saying "KVM is not available", you can ignore it for now. This happens in some VirtualBox-based nested setups. As long as you're able to complete the VM creation steps and Fedora installs, this warning has no impact.
+
+---
+
+### Step 4.3: Select Installation Media
+
+- Choose: **Local install media (ISO)**
+- Click **Browse**, then navigate to the downloaded `Fedora-Server-dvd-x86_64-42-1.1.iso`
+- OS Type: **Fedora**
+
+> virt-manager will attempt to auto-detect the OS from the ISO. If it fails, you can manually select **Fedora** from the list.
+
+![Screenshot 14: Installation Media Selection](../screenshots/14-virt-media.png)
+
+---
+
+### Step 4.4: Assign Memory and CPU
+
+- Memory: **4096 MB** (4GB)
+- CPUs: **2**
+
+![Screenshot 15: Memory and CPU Config](../screenshots/15-virt-memory-cpu.png)
+
+---
+
+### Step 4.5: Create Disk Image
+
+- Ensure **Enable storage for this virtual machine** is checked
+- Create a disk image of **30 GB** (or more if needed)
+
+This disk format will be default to QCOW2 behind the scenes.
+
+![Screenshot 16: Disk Configuration](../screenshots/16-virt-disk.png)
+
+---
+
+### Step 4.6: Finalize VM Configuration
+
+- Name: `ipa-server`
+- Ensure the box is checked: **Customize configuration before install**
+- Ensure the **Network selection** is set to `Virtual network 'default': NAT`
+- Click **Finish**
+
+![Screenshot 17: Final VM Summary Before Customization](../screenshots/17-virt-finalize.png)
+
+---
+
+### Step 4.7: Customize VM Settings Before Installation
+
+The VM will open in configuration mode because we enabled **"Customize configuration before install"**.
+
+- Under the **Overview** tab:
+    - Change **Firmware** from `BIOS` to `UEFI`
+    - Keep **Chipset** as `Q35`
+    - Under **Video**, set the model to `QXL` (recommended for Spice Support)
+    - Leave other settings as default
+
+![Screenshot 18: Overview Tab Showing UEFI Firmware]()
+
+Once done, click **Apply** (bottom-right) to save the configuration, then click **Begin Installation** (top-left)
+
+---
+
+### Step 4.8: Begin Fedora Installation
+
+Once the configuration is saved, click **Begin Installation** to start the Fedora installer.
+
+Go through the following setup steps:
+
+- **Select Language**: English (or your preference)
+- **Installation Destination**: Use automatic partitioning
+- **Root Password**: Set a secure password
+- **User Creation**: Create an admin user (e.g., `ipaadmin`) and give it administrator privileges
+ 
+![Screenshot 19: Fedora installation in progress](../screenshots/19-virt-install-started.png)
+
+> **Troubleshooting Note:**
+> If the Fedora installer shows a black screen or hangs, try changing the VM’s video model from `Virtio` to `QXL` in the **Video** settings of `virt-manager`. Also ensure the Fedora ISO is correctly attached and set to boot first in the Boot Options menu.
