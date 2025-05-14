@@ -1,102 +1,39 @@
-# Phase 1: Ubuntu Admin VM Setup
+# Phase 1: Prepare Windows 11 Host for Hyper-V
+_Note: This file replaces the original VirtualBox setup. See `00a-migration-rationale.md` for migration details._
 
-## Step 1: Download Ubuntu Desktop ISO
+## Step 1: Turn ON Hyper-V and Required Features
 
-Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
+To run the Ubuntu Admin VM using Hyper-V, we first enable the Hyper-V feature on the Windows 11 host.
 
-- URL: [https://ubuntu.com/download/desktop](https://ubuntu.com/download/desktop) 
-- Version used in this lab: Ubuntu 24.04.2 LTS
-- File: `ubuntu-24.04.2-desktop-amd64.iso`
-- Size: ~5.9GB
+### 1. Open "Windows Features"
 
-**Note**: This ISO is large (~5GB) and includes GNOME and all major desktop components. You may choose the Minimal ISO instead if you prefer a lighter base and are comfortable installing required packages manually.
+- Press `Windows + S` and search for “Windows Features”.
+- Click **“Turn Windows features on or off”**.
+- Check the following boxes:
+  - **Hyper-V**
+  - **Virtual Machine Platform**
+  - **Windows Hypervisor Platform**
+ 
+![Screenshot 1: Enable Hyper-V features](../screenshots/01-hyperv-enable.png)
 
 ---
 
-## Step 2: Create the `ubuntu-admin-vm` in VirtualBox
+### 2. Reboot After Enabling Features
 
-### 1. Launch Virtual Box and Click "New"
+Once selected, click **OK**. Windows will apply the changes and ask you to reboot.
 
-![Screenshot 1: Virtual Box - New VM](../screenshots/01-vbox-new.png)
+![Screenshot 2: Restart prompt](../screenshots/02-hyperv-reboot.png)
 
-### 2. Set the VM Name and OS Type
+After rebooting, Hyper-V will be available via the Start Menu → "Hyper-V Manager".
 
-- **Name:** `ubuntu-admin-vm`
-- **Type:** Linux
-- **Version:** Ubuntu (64-bit)
+---
 
-![Screenshot 2: VM Name and Type](../screenshots/02-vbox-name-type.png)
+# Phase 2: Set Up the Ubuntu Admin VM
 
-### 3. Allocate Memory and CPU
+## Step 1: Open Hyper-V Manager
 
-- **RAM:** 16,384MB (16GB)
-- **CPUs:** 4-6 (depending on your host capacity)
+- Press `Windows + S` and search for "Hyper-V Manager".
+- Open the application and verify it launches successfully.
+- Confirm your PC name appears on the left panel under Hyper-V Manager.
 
-![Screenshot 3: Memory Settings](../screenshots/03-vbox-memory.png)
-
-### 4. Create Virtual Hard Disk
-
-- **Disk Type:** VDI (dynamically allocated)
-- **Size:** 80GB
-
-![Screenshot 4: Disk Creation](../screenshots/04-vbox-disk.png)
-
-### 5. Configure System Settings
-
-Go to **Settings > System > Processor**:
-- **Enable Nested Virtualization** by checking:
-    - "Enable PAE/NX"
-    - "Enable Nested VT-x/AMD-V"
-
-(If it's not available here, you'll enable it via `VBoxManage` after creation.)
-
-![Screenshot 5: Enable Nested Virtualization](../screenshots/05-vbox-cpu-nested.png)
-
- #### Troubleshooting VT-x/AMD-V Not Visible
-
- Checkbox for VT-x/AMD-V is not clickable in VirtualBox GUI. Enabled nested virtualization from the Windows host using this command (with the VM powered off):
-
- ```powershell
-cd "C:\Program Files\Oracle\VirtualBox"
-.\VBoxManage.exe modifyvm "ubuntu-admin-vm" --nested-hw-virt on
-.\VBoxManage.exe showvminfo "ubuntu-admin-vm"
-```
-![Screenshot 5a: Nested Virtualization CLI troubleshoot](../screenshots/05a-vbox-cpu-nested-cli-troubleshoot.png)
-
-### 6. Attach the ISO
-
-If you enabled Unattended Installation during VM creation, the ISO may already be attached and the installer will start automatically. In that case, you can skip this step.
-
-Otherwise, attach the ISO manually:
-
-- Go to **Settings > Storage**:
-    - Under **Controller: SATA**, click the small **CD icon with the plus sign** to add a new optical drive
-    - In the pop-up window, click the **Add** icon (top-left corner) to browse your local files
-    - Locate and select your ISO file: `ubuntu-24.04.2-desktop-amd64.iso`
-    - Click **Choose** to confirm
-    - Make sure your final setup looks like the screenshot below before continuing.
-
-![Screenshot 6: Attach ISO](../screenshots/06-vbox-iso.png)
-
-### 7. Start the VM and Install Ubuntu
-
-Select `ubuntu-admin-vm` in VirtualBox and click **Start**. The VM will boot into the Ubuntu installer.
-
-Go through the installation using default options:
-
-- Choose your preferred keyboard layout
-- Accept default installation type (erase disk and install Ubuntu)
-- Optionally install updates and third-party software
-- Create a user account with **sudo access**
-
-![Screenshot 7: Ubuntu Installer](../screenshots/07-vbox-install-ubuntu.png)
-
-After the installation completes, reboot the VM. Then, the system will prompt:
-
-> Please remove the installation medium, then press ENTER
-
-If you already removed the ISO, simply press **Enter** to reboot into your installed system.
-
-When the desktop loads for the first time, you should see Ubuntu welcome screen like this:
-
-![Screenshot 8: Ubuntu Desktop after Install](../screenshots/08-vbox-installed-desktop.png)
+![Screenshot 3: Hyper-V Manager Open With Host Visible](../screenshots/03-hyperv-opened.png)
