@@ -11,10 +11,10 @@ This project is designed as part of a hands-on portfolio to showcase system admi
 
 ## Technology Stack
 
-- **Host OS:** Windows 11 Education with Virtual Box
+- **Host OS:** Windows 11 Education with Hyper-V
 - **Admin VM (Outer VM):** Ubuntu 24.04.02 LTS Desktop with KVM/QEMU, libvirt, virt-manager
 - **Nested VMs**
-    - `ipa-server`: Fedora Server 39 with FreeIPA (LDAP, DNS, Kerberos)
+    - `ipa-server`: Fedora Server 42 with FreeIPA (LDAP, DNS, Kerberos)
     - `ubuntu-client1`, `ubuntu-client2`: Ubuntu Desktop clients
     - `win-client`: Optional Windows 10/11 domain join testing
 
@@ -22,7 +22,7 @@ This project is designed as part of a hands-on portfolio to showcase system admi
 
 This documentation is divided into the following stages:
 
-- `01-ubuntu-admin-vm-virtualbox.md`: Creating and preparing the outer Ubuntu VM
+- `01-ubuntu-admin-vm-hyperv.md`: Creating and preparing the outer Ubuntu VM
 - `02-create-nested-vms.md`: Defining and installing KVM nested guests
 - `03-freeipa-server-setup.md`: FreeIPA installation and DNS/Kerberos setup
 - `04-join-ubuntu-client.md`: Joining Ubuntu to the IPA domain
