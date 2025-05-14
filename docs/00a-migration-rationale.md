@@ -19,12 +19,11 @@ This migration addresses those issues and aligns the lab environment with profes
 ## What’s Changing?
 
 - A new Ubuntu Admin VM will be created using Hyper-V.
-- All nested VMs (Fedora IPA server, Ubuntu client, Windows client) will be hosted inside this Admin VM using KVM/QEMU.
 - Setup guides and screenshots will be rewritten to reflect this environment.
 
 ## What’s Not Changing?
 
-- The overall architecture remains the same: one Admin VM hosting 3 nested VMs.
+- The overall architecture remains the same: one Admin VM (Ubuntu) hosting 3 nested VMs (Fedora IPA server, Ubuntu client, Windows client) using KVM/QEMU.
 - The project goal — demonstrating centralized Linux authentication with FreeIPA — remains the same.
 - The documentation style, professionalism, and structure remain consistent.
 
