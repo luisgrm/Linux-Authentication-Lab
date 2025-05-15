@@ -55,11 +55,11 @@ To give the Ubuntu Admin VM full internet access and LAN communication, we have 
 ### 2. Configure the Switch
 
 - Name it: `External Switch (Internet Access)`
-- Choose your physical network adapter (Wi-Fi or Ethernet)
-- Leave **Allow management OS to share this network adapter** checked (recommended)
 - For **Connection type**, choose the real adapter that gives your host internet access.  
   
   In my case: `Qualcomm FastConnect 7800 Wi-Fi 7 High Band Simultaneous (HBS) Network Adapter`
+- Leave **Allow management OS to share this network adapter** checked (recommended)
+
   
 - Do **not** select:
   - VirtualBox adapters
