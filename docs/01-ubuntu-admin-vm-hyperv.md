@@ -37,3 +37,34 @@ After rebooting, Hyper-V will be available via the Start Menu → "Hyper-V Manag
 - Confirm your PC name appears on the left panel under Hyper-V Manager.
 
 ![Screenshot 3: Hyper-V Manager Open With Host Visible](../screenshots/03-hyperv-opened.png)
+
+## Step 2 (Before VM Creation): Create an External Virtual Switch
+
+To give the Ubuntu Admin VM full internet access and LAN communication, we have to create an **External Virtual Switch** in Hyper-V.
+
+### 1. Open the Virtual Switch Manager
+
+- In **Hyper-V Manager**, select your computer name (left panel)
+- Click **“Virtual Switch Manager…”** from the right panel
+- Select **External** and click **Create Virtual Switch**
+ 
+![Screenshot 4a: Select External Switch Type](../screenshots/04a-hyperv-switch-type.png)
+
+---
+
+### 2. Configure the Switch
+
+- Name it: `External Switch (Internet Access)`
+- Choose your physical network adapter (Wi-Fi or Ethernet)
+- Leave **Allow management OS to share this network adapter** checked (recommended)
+- For **Connection type**, choose the real adapter that gives your host internet access.  
+  
+  In my case: `Qualcomm FastConnect 7800 Wi-Fi 7 High Band Simultaneous (HBS) Network Adapter`
+  
+- Do **not** select:
+  - VirtualBox adapters
+  - Numbered duplicates (#2, #3, etc.)
+
+![External Switch Configuration ](../screenshots/04b-hyperv-switch-config.png)
+
+Click **OK** to apply and close the window.
