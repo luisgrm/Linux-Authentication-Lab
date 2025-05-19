@@ -394,3 +394,120 @@ This usually means the VM is still trying to boot from the Ubuntu ISO installer,
 The VM should now boot into your installed Ubuntu system. You’ll see the login screen, followed by the welcome screen.
 
 ![Screenshot 20: Ubuntu Welcome Screen](../screenshots/20-ubuntu-welcome.png)
+
+---
+
+## Step 5: Post-Install Setup on Ubuntu Admin VM
+
+After logging into the freshly installed Ubuntu Admin VM, we prepare the system for virtualization by applying updates and setting up required packages.
+
+---
+
+### 1. Update and Upgrade the System
+
+To ensure the VM is secure and stable, we update all system packages before installing any virtualization tools.
+
+---
+
+#### Script: `scripts/update-system.sh`
+
+This script updates the package index and upgrades the system using the Advanced Package Tool (apt) package manager.
+
+![Screenshot 21: Contents of update-system.sh](../screenshots/21-adminvm-update-script.png)
+
+---
+
+#### Usage
+```bash
+chmod +x scripts/update-system.sh
+./scripts/update-system.sh
+```
+
+- If the script runs successfully, you should see output similar to the screenshot below.
+
+![Screenshot 22: Update & Upgrade Sucessful Output](../screenshots/22-adminvm-system-updated.png)
+
+> After the upgrade, Ubuntu may prompt for system restart. If this happens, click **Restart Later**
+
+---
+
+### 2. Install KVM and Virtualization Tools
+
+Now that the system is up to date, we install the necessary virtualization components that allow this Ubuntu Admin VM to host nested virtual machines using KVM.
+
+---
+
+##### Script: `scripts/install-kvm-tools.sh`
+
+This script installs all required virtualization tools in a single run, and adds the current user to the `kvm` and `libvirt` groups, to ensure proper permission handling when using `virt-manager`.
+
+It includes the following packages:
+
+- `qemu-kvm`: The main hypervisor for virtualization
+- `libvirt-daemon-system`: System-level libvirt services
+- `libvirt-clients`: CLI tools for managing libvirt
+- `virt-manager`: A GUI to create and manage virtual machines
+- `bridge-utils`: Optional networking bridge tools for VM interface bridging
+
+![Screenshot 23a: install-kvm-tools.sh script](../screenshots/23a-kvm-install-script.png)
+
+---
+
+#### Usage
+```bash
+chmod +x scripts/install-kvm-tools.sh
+./scripts/install-kvm-tools.sh
+```
+
+- If the script runs successfully, you should see output similar to the screenshot below.
+
+![Screenshot 23b: install-kvm-tools complete](../screenshots/23b-kvm-install-complete.png)
+
+#### Restart Required
+
+After installing the KVM tools, you must reboot the system to apply updates and to apply group membership changes. If you skip the reboot, `virt-manager` may not detect virtualization features correctly.
+
+---
+
+### 3. Verify KVM and Nested Virtualization
+
+Before creating nested virtual machines, we verify that the virtualization stack is working correctly inside the Ubuntu Admin VM.
+
+---
+
+#### Commands to Run
+
+Open a terminal and run the following commands:
+
+```bash
+lsmod | grep kvm
+egrep -c '(vmx|svm)' /proc/cpuinfo
+groups
+virsh list --all
+virt-manager
+```
+
+These commands confirm that:
+- KVM modules are loaded and active
+- Nested virtualization is recognized by the kernel
+- The current user has access to `kvm` and `libvirt` groups
+- `libvirt` is active and ready to manage VMs
+- `virt-manager` can connect to the system backend (QEMU/KVM)
+
+![Screenshot 24: Verification of Virtualization and Group Access](../screenshots/24-adminvm-verification.png)
+
+> Please ensure that `virt-manager` launches without errors and shows a local QEMU/KVM connection in the GUI. This confirms that virtualization is fully functional inside your admin VM.
+> If you receive no output from `lsmod | grep kvm` or if `/proc/cpuinfo` returns `0`,  that may be expected in some Hyper-V environments. As long as `virt-manager` launches, and you can access the QEMU/KVM backend, you are good to proceed.
+
+---
+
+## ✅ Ubuntu Admin VM Setup Complete
+
+The Ubuntu Admin VM is now fully configured and ready to host nested virtual machines using KVM.
+
+We have:
+- Installed and configured Ubuntu Desktop on Hyper-V
+- Applied system updates and installed KVM/libvirt tools
+- Verified that virtualization is functioning correctly
+
+**Next:** Proceed to [`02-create-nested-vms.md`](./02-create-nested-vms.md) to create the Fedora IPA Server, Ubuntu Client, and Windows Client VMs inside this admin environment.

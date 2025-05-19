@@ -7,7 +7,7 @@
 #: Description : Updates the Ubuntu Admin VM system packages
 #: Options     : None
 
-set -e # Tells Bash to exit immediately if a command exits with a non-zero status. Ensure script exits on first command failure
+set -e
 
 echo "Updating package index..."
 sudo apt update
