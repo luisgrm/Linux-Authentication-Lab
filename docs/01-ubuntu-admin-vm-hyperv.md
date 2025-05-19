@@ -497,6 +497,7 @@ These commands confirm that:
 ![Screenshot 24: Verification of Virtualization and Group Access](../screenshots/24-adminvm-verification.png)
 
 > Please ensure that `virt-manager` launches without errors and shows a local QEMU/KVM connection in the GUI. This confirms that virtualization is fully functional inside your admin VM.
+
 > If you receive no output from `lsmod | grep kvm` or if `/proc/cpuinfo` returns `0`,  that may be expected in some Hyper-V environments. As long as `virt-manager` launches, and you can access the QEMU/KVM backend, you are good to proceed.
 
 ---
