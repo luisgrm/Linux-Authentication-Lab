@@ -5,7 +5,7 @@ _Note: This file replaces the original VirtualBox setup. See `00a-migration-rati
 
 To run the Ubuntu Admin VM using Hyper-V, we first enable the Hyper-V feature on the Windows 11 host.
 
-### 1. Open "Windows Features"
+### 1.1: Open "Windows Features"
 
 - Press `Windows + S` and search for “Windows Features”.
 - Click **“Turn Windows features on or off”**.
@@ -18,7 +18,7 @@ To run the Ubuntu Admin VM using Hyper-V, we first enable the Hyper-V feature on
 
 ---
 
-### 2. Reboot After Enabling Features
+### 1.2: Reboot After Enabling Features
 
 Once selected, click **OK**. Windows will apply the changes and ask you to reboot.
 
@@ -44,7 +44,7 @@ After rebooting, Hyper-V will be available via the Start Menu → "Hyper-V Manag
 
 To give the Ubuntu Admin VM full internet access and LAN communication, we have to create an **External Virtual Switch** in Hyper-V.
 
-### 1. Open the Virtual Switch Manager
+### 2.1: Open the Virtual Switch Manager
 
 - In **Hyper-V Manager**, select your computer name (left panel)
 - Click **“Virtual Switch Manager…”** from the right panel
@@ -54,7 +54,7 @@ To give the Ubuntu Admin VM full internet access and LAN communication, we have 
 
 ---
 
-### 2. Configure the Switch
+### 2.2: Configure the Switch
 
 - Name it: `External Switch (Internet Access)`
 - For **Connection type**, choose the real adapter that gives your host internet access.  
@@ -78,7 +78,7 @@ Now that Hyper-V is enabled and the external switch is configured, we'll create 
 
 ---
 
-### 1. Download Ubuntu Desktop ISO
+### 3.1: Download Ubuntu Desktop ISO
 
 Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
@@ -94,7 +94,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 2. Create a New VM
+### 3.2: Create a New VM
 
 - In **Hyper-V Manager**, click **New > Virtual Machine** (in the right panel)
 - Click **Next** through the *Before You Begin* screen
@@ -103,7 +103,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 3. Specify Name and Location
+### 3.3: Specify Name and Location
 
 - **Name**: `ubuntu-admin-vm`
 - You may optionally check **Store the virtual machine in a different location** if you want to save the VM files to a specific drive (e.g. SSD for faster performance or external disk for portability).
@@ -112,7 +112,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 4. Specify Generation
+### 3.4: Specify Generation
 
 - Choose: **Generation 2**
 - This enables UEFI and better compatibility with newer OSes like Ubuntu.
@@ -123,7 +123,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 5. Assign Memory
+### 3.5: Assign Memory
 
 - Startup memory: **8192 MB** (8 GB)
 - You may increase this to **12288 MB (12 GB)** or **16384 MB (16 GB)** if your system has sufficient RAM.
@@ -133,7 +133,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 6. Configure Networking
+### 3.6: Configure Networking
 
 - Connect the VM to the **External Virtual Switch** you created earlier (`External Switch (Internet Access)`).
 
@@ -141,7 +141,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 7. Create Virtual Hard Disk
+### 3.7: Create Virtual Hard Disk
 
 - Select **Create a virtual hard disk** (default)
 - Name: `ubuntu-admin-vm.vhdx`
@@ -152,7 +152,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 8. Select Installation Media
+### 3.8: Select Installation Media
 
 - Choose **Install an operating system from a bootable CD/DVD ROM**
 - Select **Image file (.iso)**
@@ -162,7 +162,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 ---
 
-### 9. Finish Setup
+### 3.9: Finish Setup
 
 - Review the summary and click **Finish**
 - The VM will be created and ready to power on
@@ -178,7 +178,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 Now that the `ubuntu-admin-vm` is created, it's time to boot it and begin installing Ubuntu.
 
-### 1. Start the VM
+###4. 1: Start the VM
 
 - In **Hyper-V Manager**, right-click `ubuntu-admin-vm` and choose **Connect**
 - Then, click the green **Start** button at the top.
@@ -211,7 +211,7 @@ Then, restart the VM. The Ubuntu installer should now load properly
 
 ---
 
-### 2. Go Through the Installer
+###4. 2: Go Through the Installer
 
 Once the Ubuntu installer loads:
 
@@ -227,7 +227,7 @@ Once the Ubuntu installer loads:
 
 ---
 
-### 3. Skip Installer Update Prompt
+###4. 3: Skip Installer Update Prompt
 
 You may see the following screen:
 
@@ -243,7 +243,7 @@ You may see the following screen:
 
 ---
 
-### 4. Installation Type
+###4. 4: Installation Type
 
 On the "Try or Install Ubuntu" screen:
 
@@ -254,7 +254,7 @@ On the "Try or Install Ubuntu" screen:
 
 ---
 
-### 5. Installation Mode
+###4. 5: Installation Mode
 
 On the "Type of Installation" screen:
 
@@ -265,7 +265,7 @@ _We do not use automated installation, as it requires a custom `autoinstall.yaml
 
 ---
 
-### 6. Application Selection
+###4. 6: Application Selection
 
 On the "Applications" screen:
 
@@ -279,7 +279,7 @@ We avoid the **Extended selection** to keep the system minimal and reduce unnece
 
 ---
 
-### 7. Optimize Your Computer
+###4. 7: Optimize Your Computer
 
 On the "Optimise your computer" screen:
 
@@ -295,7 +295,7 @@ On the "Optimise your computer" screen:
 
 ---
 
-### 8. Disk Setup
+###4. 8: Disk Setup
 
 On the "Disk setup" screen:
 
@@ -309,7 +309,7 @@ Click **Next**
 
 ---
 
-### 9. Create Your Account
+###4. 9: Create Your Account
 
 Fill out the user account setup form:
 
@@ -329,7 +329,7 @@ Click **Next** to continue.
 
 ---
 
-### 10. Set Your Timezone
+### 4.10: Set Your Timezone
 
 - Click on your region or let Ubuntu auto-detect your location.
 - In this example:
@@ -340,7 +340,7 @@ Click **Next** to continue.
 
 ---
 
-### 11. Final Confirmation and Install
+### 4.11: Final Confirmation and Install
 
 You'll now see a **summary screen** confirming all your installation choices:
 
@@ -361,7 +361,7 @@ If everything looks correct, click **Install** to begin the Ubuntu installation 
 
 ---
 
-### 12. Installation Complete
+### 4.12: Installation Complete
 
 Once Ubuntu has finished installing, you'll see a confirmation message:
 
@@ -403,7 +403,7 @@ After logging into the freshly installed Ubuntu Admin VM, we prepare the system 
 
 ---
 
-### 1. Update and Upgrade the System
+### 5.1: Update and Upgrade the System
 
 To ensure the VM is secure and stable, we update all system packages before installing any virtualization tools.
 
@@ -431,7 +431,7 @@ chmod +x scripts/update-system.sh
 
 ---
 
-### 2. Install KVM and Virtualization Tools
+### 5.2: Install KVM and Virtualization Tools
 
 Now that the system is up to date, we install the necessary virtualization components that allow this Ubuntu Admin VM to host nested virtual machines using KVM.
 
@@ -469,7 +469,7 @@ After installing the KVM tools, you must reboot the system to apply updates and 
 
 ---
 
-### 3. Verify KVM and Nested Virtualization
+### 5.3: Verify KVM and Nested Virtualization
 
 Before creating nested virtual machines, we verify that the virtualization stack is working correctly inside the Ubuntu Admin VM.
 
