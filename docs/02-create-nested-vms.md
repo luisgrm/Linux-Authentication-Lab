@@ -11,17 +11,17 @@ These nested VMs will include:
 
 ---
 
-## Step 1: Create the ipa-server VM in Virt-Manager
+## Step 1: Create the ipa-server VM
 
 This virtual machine will host the FreeIPA server, which provides centralized authentication, DNS, and Kerberos services for our lab.
 
 ---
 
-### 1: Download Fedora Server 42 ISO
+### 1.1: Download Fedora Server 42 ISO
 
 Download the official Fedora Server ISO from the Fedora Project:
 
-- Download the latest [Fedora Server ISO](https://getfedora.org/en/server/download/)
+- Download the latest [Fedora Server ISO](https://fedoraproject.org/en/server/download)
 - Version used in this lab: Fedora Server 42 (x86_64)
 - File: `Fedora-Server-dvd-x86_64-42-1.5.iso`
 - Size: ~2.1GB
