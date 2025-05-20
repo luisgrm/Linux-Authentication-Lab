@@ -178,7 +178,7 @@ Download the latest **LTS Ubuntu Desktop** ISO from the official Ubuntu website:
 
 Now that the `ubuntu-admin-vm` is created, it's time to boot it and begin installing Ubuntu.
 
-###4. 1: Start the VM
+### 4.1: Start the VM
 
 - In **Hyper-V Manager**, right-click `ubuntu-admin-vm` and choose **Connect**
 - Then, click the green **Start** button at the top.
@@ -211,7 +211,7 @@ Then, restart the VM. The Ubuntu installer should now load properly
 
 ---
 
-###4. 2: Go Through the Installer
+### 4.2: Go Through the Installer
 
 Once the Ubuntu installer loads:
 
@@ -227,7 +227,7 @@ Once the Ubuntu installer loads:
 
 ---
 
-###4. 3: Skip Installer Update Prompt
+### 4.3: Skip Installer Update Prompt
 
 You may see the following screen:
 
@@ -243,7 +243,7 @@ You may see the following screen:
 
 ---
 
-###4. 4: Installation Type
+### 4.4: Installation Type
 
 On the "Try or Install Ubuntu" screen:
 
@@ -254,7 +254,7 @@ On the "Try or Install Ubuntu" screen:
 
 ---
 
-###4. 5: Installation Mode
+### 4.5: Installation Mode
 
 On the "Type of Installation" screen:
 
@@ -265,7 +265,7 @@ _We do not use automated installation, as it requires a custom `autoinstall.yaml
 
 ---
 
-###4. 6: Application Selection
+### 4.6: Application Selection
 
 On the "Applications" screen:
 
@@ -279,7 +279,7 @@ We avoid the **Extended selection** to keep the system minimal and reduce unnece
 
 ---
 
-###4. 7: Optimize Your Computer
+### 4.7: Optimize Your Computer
 
 On the "Optimise your computer" screen:
 
@@ -295,7 +295,7 @@ On the "Optimise your computer" screen:
 
 ---
 
-###4. 8: Disk Setup
+### 4.8: Disk Setup
 
 On the "Disk setup" screen:
 
@@ -309,7 +309,7 @@ Click **Next**
 
 ---
 
-###4. 9: Create Your Account
+### 4.9: Create Your Account
 
 Fill out the user account setup form:
 
