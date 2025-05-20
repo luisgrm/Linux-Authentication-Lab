@@ -22,9 +22,9 @@ This virtual machine will host the FreeIPA server, which provides centralized au
 Download the official Fedora Server ISO from the Fedora Project:
 
 - Download the latest [Fedora Server ISO](https://fedoraproject.org/en/server/download)
-- Version used in this lab: Fedora Server 42 (x86_64)
-- File: `Fedora-Server-dvd-x86_64-42-1.5.iso`
-- Size: ~2.1GB
+- Version used in this lab: **Fedora Server 42 (x86_64)**
+- File: `Fedora-Server-dvd-x86_64-42-1.1.iso`
+- Size: ~2.7GB
 
 > Tip: Use the Ubuntu Admin VM's browser to download the ISO directly into `~/Downloads` or a custom `~/ISOs` directory
 
