@@ -7,12 +7,14 @@ The goal is to simulate real-world enterprise Linux support scenarios in prepara
 ---
 
 ## Lab Architecture
+```
 Windows 11 (host)
 |── Hyper-V
 │   |── Ubuntu Admin VM (Desktop)
 │       |── Fedora IPA Server (KVM)
 │       |── Ubuntu Client(s) (KVM)
 │       |── Windows Client (KVM, optional)
+```
 
 All nested VMs are managed using **virt-manager**, with networking configured for internet access and local resolution.
 
