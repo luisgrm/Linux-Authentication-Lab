@@ -22,7 +22,7 @@ All nested VMs are managed using **virt-manager**, with networking configured fo
 
 ## Documentation
 
-The project is divided into logical, standalone phases:
+The project is divided into distinct phases:
 
 | Phase | File | Description |
 |-------|------|-------------|
