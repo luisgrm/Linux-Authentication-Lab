@@ -68,7 +68,8 @@ We'll now create the virtual machine for the FreeIPA server using the `virt-mana
 - Select: `Fedora-Server-dvd-x86_64-42-1.1.iso`
 - Click **Open**, then **Forward**
 
-> Tip: If you don't see the ISO listed, make sure you're browsing the correct location (like `~/Downloads` or `~/Desktop/ISOs`).  
+> Tip: If you don't see the ISO listed, make sure you're browsing the correct location (like `~/Downloads` or `~/Desktop/ISOs`).
+
 > You can also drag and drop the ISO into the selection window to register it.
 
 ![Screenshot 27: Fedora ISO Selected](../screenshots/27-ipa-vm-iso-selected.png)
@@ -94,6 +95,7 @@ We'll now create the virtual machine for the FreeIPA server using the `virt-mana
 - Leave the default location
 
 > Fedora recommends at least 40 GB of storage. That storage size is enough space for FreeIPA logs, updates, and snapshots.
+
 > The image will be created in **QCOW2 format** by default.
 
 ![Screenshot 29: IPA Server Disk Setup](../screenshots/29-ipa-vm-disk.png)
@@ -116,7 +118,7 @@ This lets us adjust system settings before launching the Fedora installer.
 
 #### 7. Review & Customize VM Configuration
 
-Before Fedora begins installing, we review and fine-tune the new VM’s configuration.
+Before Fedora begins installing, we review and adjust the new VM’s configuration.
 
 ---
 
@@ -130,8 +132,8 @@ Before Fedora begins installing, we review and fine-tune the new VM’s configur
 
 **Boot Options**
 - Go to the **Boot Options** tab
-- ✅ Check **Enable boot menu**
-- ✅ Make sure **CDROM** is first in the boot device list (before Hard Disk)
+- Check **Enable boot menu**
+- Make sure **CDROM** is first in the boot device list (before Hard Disk)
 
 This ensures the Fedora ISO boots properly.
 
@@ -170,8 +172,6 @@ After a brief loading period, you should see the **Welcome to Fedora** graphical
 
 ![Screenshot 35: Fedora Installer Welcome Screen](../screenshots/35-ipa-vm-installer-welcome.png)
 
-We'll continue setup in the next step by selecting installation language and target disk.
-
 ---
 
 ### 1.4: Select Language and Installation Destination
@@ -207,3 +207,221 @@ Your screen should now look like this:
 ![Screenshot 36: Fedora Installation Summary](../screenshots/36-ipa-vm-install-summary.png)
 
 In the next step, we’ll begin customizing these one by one.
+
+---
+
+### 1.5: Configure Time & Date
+
+To ensure proper time synchronization across the domain and accurate Kerberos authentication, we must configure the correct timezone for the IPA server.
+
+---
+
+#### 1. Open Time & Date Settings
+
+- In the **Installation Summary** screen, click **Time & Date**
+
+---
+
+#### 2. Select Your Region and Timezone
+
+- Region: `Americas`
+- City: `Vancouver`
+
+Fedora should automatically detect your system time and location, but verify it's correct. This ensures log timestamps, certificates, and time-sensitive protocols (like Kerberos) work reliably.
+
+> **Tip:** Leave the default **Automatic Date & Time** enabled unless you are on an isolated network.
+
+> Fedora enables Automatic Date & Time by default using **systemd-timesyncd** (or chrony) and will automatically sync with public NTP servers as long as the VM has internet access.
+
+---
+
+#### 3. Click **Done**
+
+After confirming your timezone, click **Done** (top-left corner) to return to the Installation Summary screen.
+
+![Screenshot 37: Date and Timezone](../screenshots/37-ipa-vm-timezone.png)
+
+---
+
+### 1.6: Set Installation Destination (Disk)
+
+Next, we configure the target disk where Fedora will be installed.
+
+---
+
+#### 1. Open Installation Destination
+
+- From the **Installation Summary** screen, click **Installation Destination**
+- We should see the virtual hard disk listed under **Local Standard Disks**  
+  Example: `Virtio Block Device - 40 GiB`
+
+---
+
+#### 2. Select the Disk
+
+- Click the checkbox to select the disk (it should highlight with a checkmark)
+
+---
+
+#### 3. Storage Configuration
+
+- Under **Storage Configuration**, leave the default **“Automatic”** selected. 
+  This allows Fedora to automatically partition the disk (LVM layout)
+
+![Screenshot 38: Installation Disk](../screenshots/38-ipa-vm-installation-disk.png)
+
+> This is ideal for FreeIPA since it ensures Fedora’s default partition layout, including separate logical volumes, is applied.
+
+---
+
+#### 4. Confirm
+
+- Click **Done** to return to the Installation Summary
+
+Fedora will reserve the disk for installation, but no data is written until **Begin Installation** is clicked later.
+
+---
+
+### 1.7: Configure Network and Hostname
+
+Before installation, we need to ensure the Fedora VM is connected to the network and assigned a hostname that reflects its server role.
+
+---
+
+#### 1. Enable Networking and Set Hostname
+
+- Click **Network & Host Name** from the Installation Summary screen.
+- On the right panel, toggle the **switch to ON** (upper right) to enable the NIC (`enp1s0`).
+- You should see an IP address assigned via DHCP.
+- In the **Hostname** field (bottom left), enter:
+
+```
+ipa-server.local
+```
+
+- Click **Apply**, then click **Done** to return to the summary screen.
+
+![Screenshot 39: Networking and Hostname Configured](../screenshots/39-ipa-vm-network-hostname.png)
+
+> The `.local` suffix is optional but recommended to help with DNS-based discovery in future lab steps.
+
+---
+
+### 1.8: Set Root Password and Create Admin User
+
+Before installation begins, Fedora requires at least one user account to be configured. We’ll set a **secure root password** and create a primary admin user for managing the system.
+
+---
+
+#### 1. Set Root Password
+
+- Click **Root Account** from the Installation Summary screen
+- By default, **"Disable root account"** is selected
+- Switch to **"Enable root account"**
+- Enter a strong root password and confirm it.
+- Click **Done**
+
+> ⚠️ Root login is typically disabled for SSH by default. This account is mainly for system recovery and emergency admin access. 
+
+> Leave **"Allow root SSH login with password"** unchecked for better security. Use your admin user with `sudo` instead.
+
+![Screenshot 40: Set Root Password](../screenshots/40-ipa-vm-set-root-password.png)
+
+---
+
+#### 2. Create Admin User
+
+- Click **User Creation**
+- Fill in the details:
+  - **Full name**: Admin
+  - **Username**: admin
+  - Check: **Add administrative privileges to this user account**
+  - Check: **Require a password to use this account**
+  - Set and confirm a secure password
+- Click **Done**
+
+![Screenshot 41: Creation of Admin User](../screenshots/41-ipa-vm-create-admin-user.png)
+
+> This admin user will be your main login and have `sudo` privileges for day-to-day tasks.
+
+---
+
+### 1.9: Begin Installation
+
+Once all required sections in the **Installation Summary** screen are completed (no red warnings), you’re ready to begin installing Fedora Server on the `ipa-server` VM.
+
+---
+
+#### Final Check
+
+Make sure the following sections are complete:
+
+- **Time & Date**: Correct region selected (e.g., `America/Vancouver`)
+- **Installation Destination**: Disk selected with **Automatic** storage configuration
+- **Network & Hostname**: Network connected, hostname set (e.g., `ipa-server.local`)
+- **Root Account**: Enabled with a strong password
+- **User Creation**: Admin user created with `sudo` privileges
+
+> At this point, you should no longer see any red warnings on the Installation Summary screen. See the screenshot below.
+
+> If needed, compare your screen to [Screenshot 36](../screenshots/36-ipa-vm-install-summary.png), which shows the incomplete setup.
+
+![Screenshot 42: Installation Summary - All Clear](../screenshots/42-ipa-vm-install-summary-clear.png)
+
+---
+
+#### Begin the Installation
+
+- Click **Begin Installation** in the lower right corner.
+
+Fedora will now begin installing the OS onto your virtual disk.
+
+> This step may take around **5–10 minutes**, depending on your system performance.
+
+While the installation progresses, you’ll see a status screen with real-time logs.
+
+![Screenshot 43: Fedora Installation Progress](../screenshots/43-ipa-vm-install-progress.png)
+
+Once installation is finished, you’ll be prompted to reboot the system.
+
+We'll handle that next in **Step 1.10: Finalize and Reboot**.
+
+---
+
+### 1.10: Finish Installation and Reboot
+
+Once Fedora completes the installation process, you’ll see a confirmation message at the bottom of the screen:
+
+> **Fedora is now successfully installed and ready for you to use!**  
+> Go ahead and reboot your system to start using it!
+
+- Click **Reboot System** to finish the installation and restart the VM.
+
+![Screenshot 44: Fedora Installation Complete](../screenshots/44-ipa-vm-installation-complete.png)
+
+> After rebooting, Fedora will boot from the virtual disk and not the ISO. No manual ISO removal is needed in `Virt-Manager`.
+
+> You should land on a login prompt or desktop environment depending on the Fedora Server edition installed.
+
+---
+
+### 1.11: Verify Fedora Boot and Login
+
+After the reboot, your `ipa-server` VM should now boot directly from the installed virtual disk. This confirms the installation was successful and the VM is functioning correctly.
+
+---
+
+#### What to Expect
+
+- You’ll see the **Fedora boot splash** followed by a **login prompt**
+- If you created an admin user (e.g., `admin`), log in with that account
+
+> If the boot screen is stuck or shows ISO-related errors, make sure the virtual disk is the first boot option in **VM → Boot Options**.
+
+> The Fedora login prompt or initial terminal after login should like the screenshot below:
+
+![Screenshot 45: Fedora Login Prompt](../screenshots/45-ipa-vm-login.png)
+
+Once logged in, your Fedora Server VM is successfully installed and ready for future configuration.
+
+---
